@@ -35,7 +35,18 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            $this->sheetsRoutes();
         });
+    }
+
+    private function sheetsRoutes()
+    {
+        Route::middleware(['web'])
+            ->prefix('app/sheets')
+            ->name('sheet:')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/application/sheets.php'));
     }
 
     /**
