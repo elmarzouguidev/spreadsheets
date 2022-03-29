@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Application\Sheet;
 use App\Traits\GetModelByUuid;
 use App\Traits\HasCode;
 use App\Traits\UuidGenerator;
@@ -49,4 +50,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function viewedSheets()
+    {
+        return Sheet::whereIn('id', $this->viewed_sheets)->get();
+    }
+
+    public function sheets()
+    {
+        return $this->hasMany(Sheet::class);
+    }
 }
